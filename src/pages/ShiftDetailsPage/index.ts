@@ -1,0 +1,1 @@
+export { ShiftDetailsPage } from "./ShiftDetailsPage";

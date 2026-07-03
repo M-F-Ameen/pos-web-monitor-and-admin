@@ -1,0 +1,111 @@
+import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { POSPage } from "./pages/POSPage";
+import { POSPageEnhanced } from "./pages/POSPage/POSPageEnhanced";
+import { InventoryPage } from "./pages/InventoryPage";
+import { CategoriesPage } from "./pages/CategoriesPage";
+import { SalesPage } from "./pages/SalesPage";
+import { ReturnsPage } from "./pages/ReturnsPage";
+import { UsersPage } from "./pages/UsersPage";
+import { CustomersPage } from "./pages/CustomersPage";
+import { LoginPage } from "./pages/LoginPage";
+import { AuthProvider } from "./app/AuthContext";
+import { ProtectedRoute } from "./app/ProtectedRoute";
+import { ToastContainer } from "./components/ui/Toast";
+
+/**
+ * Tobacco POS - Arabic RTL.
+ * Main application with React Router v6 for proper navigation.
+ * Includes enhanced UX components: loading states, empty states,
+ * confirmation dialogs, toast notifications, and keyboard shortcuts.
+ */
+function App() {
+  return (
+    <BrowserRouter>
+      <AuthProvider>
+        <Routes>
+          {/* Login route */}
+          <Route path="/login" element={<LoginPage />} />
+
+          {/* Enhanced POS route with UX improvements */}
+          <Route
+            path="/pos-enhanced"
+            element={
+              <ProtectedRoute page="pos">
+                <POSPageEnhanced />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Original POS route */}
+          <Route
+            path="/pos"
+            element={
+              <ProtectedRoute page="pos">
+                <POSPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/inventory"
+            element={
+              <ProtectedRoute page="inventory">
+                <InventoryPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/categories"
+            element={
+              <ProtectedRoute page="categories">
+                <CategoriesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/sales"
+            element={
+              <ProtectedRoute page="sales">
+                <SalesPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/returns"
+            element={
+              <ProtectedRoute page="returns">
+                <ReturnsPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/users"
+            element={
+              <ProtectedRoute page="users">
+                <UsersPage />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/customers"
+            element={
+              <ProtectedRoute page="customers">
+                <CustomersPage />
+              </ProtectedRoute>
+            }
+          />
+
+          {/* Default redirect to Enhanced POS for demonstration */}
+          <Route path="/" element={<Navigate to="/pos-enhanced" replace />} />
+
+          {/* Catch-all redirect */}
+          <Route path="*" element={<Navigate to="/pos-enhanced" replace />} />
+        </Routes>
+        
+        {/* Global toast notifications container */}
+        <ToastContainer />
+      </AuthProvider>
+    </BrowserRouter>
+  );
+}
+
+export default App;

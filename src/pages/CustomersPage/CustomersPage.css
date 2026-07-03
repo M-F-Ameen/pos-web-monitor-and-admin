@@ -1,0 +1,38 @@
+.customers-page__content {
+  box-shadow: var(--shadow-card);
+}
+
+.customers-table-card__scroll {
+  padding: 3px 7px 7px;
+}
+
+.customers-table {
+  min-width: 1080px;
+}
+
+.customers-table th,
+.customers-table td {
+  vertical-align: top;
+}
+
+.customers-modal {
+  width: min(900px, 100%);
+}
+
+@media (max-width: 1240px) {
+  .customers-toolbar__actions {
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 900px) {
+  .customers-toolbar__chips {
+    width: 100%;
+    flex-wrap: wrap;
+  }
+
+  .customers-chip {
+    flex: 1;
+    justify-content: center;
+  }
+}

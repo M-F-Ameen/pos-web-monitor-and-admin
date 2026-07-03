@@ -1,0 +1,205 @@
+.price-increase-modal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.price-increase-modal__empty {
+  margin: 0;
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-lg);
+}
+
+.price-increase-modal__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  max-height: 360px;
+  overflow-y: auto;
+  padding-inline-end: 4px;
+}
+
+.price-increase-modal__row {
+  display: flex;
+  gap: var(--space-md);
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-md);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-tertiary);
+}
+
+.price-increase-modal__item-info {
+  min-width: 0;
+  flex: 1;
+}
+
+.price-increase-modal__item-name {
+  margin: 0 0 var(--space-xs);
+  font-size: var(--font-size-md);
+}
+
+.price-increase-modal__item-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.price-increase-modal__input-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 135px;
+}
+
+.price-increase-modal__input-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.price-increase-modal__input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  padding: 0 8px;
+  direction: ltr;
+}
+
+.price-increase-modal__input-row svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.price-increase-modal__input {
+  width: 100%;
+  height: 34px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  text-align: center;
+  direction: ltr;
+  -moz-appearance: textfield;
+}
+
+.price-increase-modal__input::-webkit-outer-spin-button,
+.price-increase-modal__input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.price-increase-modal__summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-md);
+  flex-wrap: wrap;
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  background: rgba(255, 122, 0, 0.12);
+  color: var(--color-text-primary);
+}
+
+.price-increase-modal__summary-main {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.price-increase-modal__summary-input-wrap {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-inline-start: auto;
+}
+
+.price-increase-modal__summary-input-label {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+}
+
+.price-increase-modal__summary-input-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  background: var(--color-bg-elevated);
+  padding: 0 8px;
+  direction: ltr;
+}
+
+.price-increase-modal__summary-input-row svg {
+  width: 16px;
+  height: 16px;
+  color: var(--color-accent);
+  flex-shrink: 0;
+}
+
+.price-increase-modal__summary-input {
+  width: 110px;
+  height: 34px;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--color-text-primary);
+  font-family: var(--font-family);
+  text-align: center;
+  direction: ltr;
+  -moz-appearance: textfield;
+}
+
+.price-increase-modal__summary-input::-webkit-outer-spin-button,
+.price-increase-modal__summary-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.price-increase-modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.price-increase-modal__footer-end {
+  margin-inline-start: auto;
+  display: flex;
+  gap: var(--space-md);
+}
+
+@media (max-width: 640px) {
+  .price-increase-modal__row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .price-increase-modal__input-wrap {
+    min-width: 0;
+  }
+
+  .price-increase-modal__summary {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .price-increase-modal__summary-main {
+    justify-content: space-between;
+  }
+
+  .price-increase-modal__summary-input-wrap {
+    margin-inline-start: 0;
+    justify-content: space-between;
+  }
+}

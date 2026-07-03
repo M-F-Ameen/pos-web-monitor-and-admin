@@ -1,0 +1,283 @@
+.barcode-page__content {
+  padding-left: 3px;
+}
+
+.barcode-toolbar__actions {
+  justify-content: flex-end;
+}
+
+.barcode-toolbar__brand p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.barcode-toolbar__search {
+  max-width: 520px;
+}
+
+.barcode-layout {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(320px, 1fr);
+  gap: 8px;
+}
+
+.barcode-products-card__header span {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.barcode-products-card__scroll {
+  min-height: 0;
+}
+
+.barcode-products-table {
+  min-width: 680px;
+}
+
+.barcode-products-table__checkbox-col {
+  width: 44px;
+  text-align: center !important;
+  padding: 2px 6px !important;
+}
+
+.barcode-products-table__checkbox {
+  width: 15px;
+  height: 15px;
+  cursor: pointer;
+  accent-color: var(--color-accent);
+}
+
+.barcode-products-table td strong {
+  display: block;
+}
+
+.barcode-products-table td small {
+  display: block;
+  margin-top: 2px;
+  color: var(--color-text-muted);
+  font-size: 0.8rem;
+}
+
+.barcode-products-table tbody tr {
+  cursor: pointer;
+}
+
+.barcode-products-table tbody tr.is-selected {
+  background: rgba(255, 122, 0, 0.12);
+}
+
+.barcode-products-table tbody tr.is-bulk-selected {
+  background: rgba(255, 122, 0, 0.08);
+}
+
+.barcode-products-table__code {
+  direction: ltr;
+  text-align: left;
+  font-family: "Consolas", "Courier New", monospace;
+}
+
+.barcode-state {
+  display: inline-flex;
+  align-items: center;
+  height: 28px;
+  padding: 0 10px;
+  border: 1px solid transparent;
+  border-radius: var(--radius-pill);
+  font-size: var(--font-size-xs);
+}
+
+.barcode-state--ready {
+  color: #94f6ad;
+  border-color: rgba(122, 245, 152, 0.35);
+  background: rgba(24, 84, 40, 0.35);
+}
+
+.barcode-state--missing {
+  color: #ffcf7f;
+  border-color: rgba(255, 206, 125, 0.4);
+  background: rgba(97, 74, 28, 0.45);
+}
+
+.barcode-preview-card {
+  padding-bottom: 12px;
+}
+
+.barcode-preview-meta {
+  padding: 14px;
+  display: grid;
+  gap: 4px;
+}
+
+.barcode-preview-meta h3 {
+  font-size: 1rem;
+}
+
+.barcode-preview-meta p {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.barcode-preview-canvas {
+  margin: 0 14px;
+  min-height: 200px;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+  border: 1px dashed #4f4f4f;
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  color: #222;
+}
+
+.barcode-preview-canvas svg {
+  max-width: 100%;
+  height: auto;
+}
+
+.barcode-preview-list {
+  width: 100%;
+  max-height: 360px;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding-inline-end: 2px;
+}
+
+.barcode-preview-list__item {
+  padding: 8px 10px;
+  border: 1px solid #d5d5d5;
+  border-radius: 8px;
+  background: #ffffff;
+  text-align: center;
+}
+
+.barcode-preview-list__item h4 {
+  margin: 0 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 0.84rem;
+  font-weight: 700;
+  color: #1a1a1a;
+}
+
+.barcode-preview-list__product-code {
+  font-size: 1.15rem;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: 0.2px;
+  direction: ltr;
+  color: #000;
+}
+
+.barcode-preview-list__svg {
+  display: grid;
+  place-items: center;
+  direction: ltr;
+}
+
+.barcode-preview-list__svg svg {
+  width: 100%;
+  max-width: 330px;
+  height: auto;
+}
+
+.barcode-preview-list__empty-code {
+  margin: 0;
+  font-size: 0.78rem;
+  color: #666;
+}
+
+.barcode-preview-list__code {
+  margin: 6px 0 0;
+  font-size: 0.78rem;
+  color: #333;
+  letter-spacing: 0.4px;
+}
+
+.barcode-preview-card__error {
+  margin: 10px 14px 0;
+  padding: 8px 10px;
+  border: 1px solid rgba(240, 68, 68, 0.45);
+  border-radius: var(--radius-md);
+  background: rgba(240, 68, 68, 0.12);
+  color: #ff7f7f;
+}
+
+.barcode-preview-actions {
+  margin: 12px 14px 0;
+  display: flex;
+  align-items: end;
+  gap: 8px;
+}
+
+.barcode-preview-actions__count {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  width: 126px;
+}
+
+.barcode-preview-actions__count span {
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+.barcode-preview-actions .pos-button {
+  flex: 1;
+}
+
+.barcode-regenerate-warning {
+  margin: 0;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+}
+
+.barcode-regenerate-warning__item {
+  margin: 10px 0 0;
+  padding: 8px 10px;
+  border: 1px solid #3a3a3a;
+  border-radius: var(--radius-md);
+  background: #2a2a2a;
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+@media (max-width: 1180px) {
+  .barcode-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .barcode-products-table {
+    min-width: 620px;
+  }
+}
+
+@media (max-width: 900px) {
+  .barcode-page {
+    flex-direction: column;
+  }
+
+  .barcode-toolbar__actions {
+    width: 100%;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .barcode-toolbar__search {
+    max-width: 100%;
+  }
+
+  .barcode-preview-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .barcode-preview-actions__count {
+    width: 100%;
+  }
+}

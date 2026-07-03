@@ -1,0 +1,85 @@
+.return-confirm-modal {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem 0;
+}
+
+.return-confirm-modal__info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: var(--color-gray-100);
+  border-radius: 0.375rem;
+}
+
+.return-confirm-modal__label {
+  font-weight: 600;
+  color: var(--color-gray-700);
+  margin: 0;
+}
+
+.return-confirm-modal__value {
+  font-weight: 500;
+  color: var(--color-gray-900);
+  margin: 0;
+}
+
+.return-confirm-modal__products {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.return-confirm-modal__products-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  background-color: var(--color-gray-100);
+  border-radius: 0.375rem;
+  padding: 0.75rem;
+}
+
+.return-confirm-modal__products-list li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-gray-300);
+  color: var(--color-gray-800);
+  font-size: 0.875rem;
+}
+
+.return-confirm-modal__products-list li:last-child {
+  border-bottom: none;
+}
+
+.return-confirm-modal__reason {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.return-confirm-modal__reason label {
+  font-weight: 600;
+  color: var(--color-gray-700);
+}
+
+.return-confirm-modal__warning {
+  padding: 0.75rem;
+  background-color: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 0.375rem;
+}
+
+.return-confirm-modal__warning p {
+  margin: 0;
+  color: #856404;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.return-confirm-modal__actions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}

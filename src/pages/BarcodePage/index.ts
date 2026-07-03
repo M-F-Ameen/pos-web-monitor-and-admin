@@ -1,0 +1,2 @@
+﻿export { BarcodePage } from "./BarcodePage";
+

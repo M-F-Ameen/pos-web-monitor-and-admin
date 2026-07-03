@@ -1,0 +1,143 @@
+.discount-modal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Labels */
+.discount-modal__label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* Subtotal Display */
+.discount-modal__subtotal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+}
+
+.discount-modal__subtotal-label {
+  color: var(--color-text-muted);
+}
+
+.discount-modal__subtotal-value {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+}
+
+/* Discount Type */
+.discount-modal__type-buttons {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.discount-modal__type-btn {
+  flex: 1;
+  padding: var(--space-md);
+  background: var(--color-bg-tertiary);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.discount-modal__type-btn:hover {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+}
+
+.discount-modal__type-btn--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+}
+
+/* Quick Percentages */
+.discount-modal__quick {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.discount-modal__quick-btn {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.discount-modal__quick-btn:hover {
+  background: var(--color-bg-elevated);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.discount-modal__quick-btn--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+}
+
+/* Preview */
+.discount-modal__preview {
+  padding: var(--space-md);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+}
+
+.discount-modal__preview-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-sm) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.discount-modal__preview-row--total {
+  margin-top: var(--space-sm);
+  padding-top: var(--space-md);
+  border-top: 1px solid var(--color-border);
+}
+
+.discount-modal__preview-discount {
+  color: var(--color-danger);
+  font-weight: var(--font-weight-medium);
+}
+
+.discount-modal__preview-total {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+}
+
+/* Footer */
+.discount-modal__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.discount-modal__footer-end {
+  display: flex;
+  gap: var(--space-md);
+  margin-inline-start: auto;
+}

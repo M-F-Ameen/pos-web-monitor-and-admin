@@ -23,3 +23,14 @@ Thumbs.db
 .idea
 *.swp
 *.swo
+
+# SQLite databases
+*.db
+*.db-shm
+*.db-wal
+
+# Backups
+backups/
+
+# Compiled Electron output
+electron-dist/
