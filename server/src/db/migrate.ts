@@ -12,6 +12,7 @@
 import { readFileSync, readdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import bcrypt from "bcryptjs";
 import { pool } from "./pool.js";
 
 const __filename = fileURLToPath(import.meta.url);
@@ -106,6 +107,28 @@ export async function runMigrations(): Promise<void> {
     console.log("[migrate] ✅ No pending migrations");
   } else {
     console.log(`[migrate] ✅ Applied ${pendingCount} migration(s)`);
+  }
+
+  console.log("[migrate] Checking for admin seed...");
+  try {
+    const { rows } = await pool.query("SELECT COUNT(*)::int AS cnt FROM admin_users");
+    if (rows[0].cnt === 0) {
+      const hash = bcrypt.hashSync("admin123", 10);
+      await pool.query(
+        `INSERT INTO admin_users (id, email, password_hash, name, role, is_active)
+         VALUES ($1, $2, $3, $4, $5, true)`,
+        ["admin-seed-1", "admin@poscloud.com", hash, "Super Admin", "super_admin"]
+      );
+      console.log("[migrate] ✅ Seeded default admin (admin@poscloud.com / admin123)");
+    } else {
+      console.log("[migrate] ✅ Admin user already exists, skipping seed");
+    }
+  } catch (err: any) {
+    if (err.code === "42P01") {
+      console.log("[migrate]   ⏭ admin_users table not yet created, skipping seed");
+    } else {
+      console.warn("[migrate]   ⚠ Admin seed error:", err.message);
+    }
   }
 }
 
