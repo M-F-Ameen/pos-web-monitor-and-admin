@@ -7,7 +7,7 @@ import {
 } from "electron";
 import fs from "node:fs/promises";
 import path from "node:path";
-import { initDatabase, closeDatabase, seedDatabase } from "./database";
+import { initDatabase, closeDatabase, seedDatabase, getDb } from "./database";
 import { startSyncServer, stopSyncServer } from "./sync-server";
 import * as usersService from "./services/users.service";
 import * as categoriesService from "./services/categories.service";
@@ -1087,6 +1087,77 @@ function registerIpcHandlers(): void {
       return backupService.restoreBackup(openResult.filePaths[0], scope);
     },
   );
+
+  // ---- Cloud Sync ----
+  ipcMain.handle("cloud:getSettings", () => {
+    const settings = settingsService.getSettings();
+    return settings.cloudSync ?? {
+      enabled: false,
+      serverUrl: "",
+      apiKey: "",
+      syncInterval: 5,
+      lastSyncAt: null,
+      lastSyncStatus: null,
+    };
+  });
+  ipcMain.handle("cloud:saveSettings", (_event, data) => {
+    const settings = settingsService.getSettings();
+    settings.cloudSync = { ...settings.cloudSync, ...data };
+    settingsService.updateSettings({ cloudSync: settings.cloudSync });
+    return { success: true };
+  });
+  ipcMain.handle("cloud:syncNow", async (_event) => {
+    const settings = settingsService.getSettings();
+    const cloud = settings.cloudSync;
+    if (!cloud?.enabled || !cloud.serverUrl || !cloud.apiKey) {
+      return { success: false, error: "Cloud sync is not configured" };
+    }
+    try {
+      const db = getDb();
+      const tables = [
+        { table: "categories", action: "upsert", rows: db.prepare("SELECT * FROM categories").all() },
+        { table: "products", action: "upsert", rows: db.prepare("SELECT * FROM products").all() },
+        { table: "suppliers", action: "upsert", rows: db.prepare("SELECT * FROM suppliers").all() },
+        { table: "sales", action: "upsert", rows: db.prepare("SELECT * FROM sales").all() },
+        { table: "sale_items", action: "upsert", rows: db.prepare("SELECT * FROM sale_items").all() },
+        { table: "returns", action: "upsert", rows: db.prepare("SELECT * FROM returns").all() },
+        { table: "treasury_ops", action: "upsert", rows: db.prepare("SELECT * FROM treasury_ops").all() },
+        { table: "user_shifts", action: "upsert", rows: db.prepare("SELECT * FROM user_shifts").all() },
+        { table: "customers", action: "upsert", rows: db.prepare("SELECT * FROM customers").all() },
+        { table: "users", action: "upsert", rows: db.prepare("SELECT * FROM users").all() },
+      ];
+      const body = { timestamp: new Date().toISOString(), posVersion: app.getVersion(), tables };
+      const response = await fetch(`${cloud.serverUrl.replace(/\/+$/, "")}/api/sync/batch`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: `Bearer ${cloud.apiKey}` },
+        body: JSON.stringify(body),
+      });
+      if (!response.ok) {
+        throw new Error(`Server responded with ${response.status}`);
+      }
+      cloud.lastSyncAt = new Date().toISOString();
+      cloud.lastSyncStatus = "success";
+      settings.cloudSync = cloud;
+      settingsService.updateSettings({ cloudSync: cloud });
+      return { success: true };
+    } catch (err) {
+      const message = err instanceof Error ? err.message : "Unknown error";
+      cloud.lastSyncStatus = "error";
+      settings.cloudSync = cloud;
+      settingsService.updateSettings({ cloudSync: cloud });
+      return { success: false, error: message };
+    }
+  });
+  ipcMain.handle("cloud:testConnection", async (_event, serverUrl: string, apiKey: string) => {
+    try {
+      const response = await fetch(`${serverUrl.replace(/\/+$/, "")}/api/health`, {
+        headers: { Authorization: `Bearer ${apiKey}` },
+      });
+      return { success: response.ok, error: response.ok ? undefined : `Server responded with ${response.status}` };
+    } catch (err) {
+      return { success: false, error: err instanceof Error ? err.message : "Connection failed" };
+    }
+  });
 }
 
 // ============================================

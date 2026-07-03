@@ -1,6 +1,7 @@
 import { contextBridge, ipcRenderer } from "electron";
 import type {
   AutoBackupStatus,
+  CloudSyncSettings,
   DataScope,
   PrinterListResult,
   ProductLite,
@@ -206,6 +207,16 @@ const electronAPI = {
     ipcRenderer.invoke("settings:createBackup", scope),
   restoreBackup: (scope?: DataScope) =>
     ipcRenderer.invoke("settings:restoreBackup", scope),
+
+  // ---- Cloud Sync ----
+  getCloudSyncSettings: (): Promise<CloudSyncSettings> =>
+    ipcRenderer.invoke("cloud:getSettings"),
+  saveCloudSyncSettings: (data: Partial<CloudSyncSettings>): Promise<{ success: boolean }> =>
+    ipcRenderer.invoke("cloud:saveSettings", data),
+  syncNow: (): Promise<{ success: boolean; error?: string }> =>
+    ipcRenderer.invoke("cloud:syncNow"),
+  testCloudConnection: (serverUrl: string, apiKey: string): Promise<{ success: boolean; error?: string }> =>
+    ipcRenderer.invoke("cloud:testConnection", serverUrl, apiKey),
 } as const;
 
 contextBridge.exposeInMainWorld("electronAPI", electronAPI);

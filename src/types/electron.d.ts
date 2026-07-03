@@ -22,6 +22,7 @@ import type {
   TreasuryOperation,
   TreasurySummary,
   POSSettings,
+  CloudSyncSettings,
   DataScope,
   DataResetSummary,
   OperationsResetSummary,
@@ -246,6 +247,17 @@ declare global {
       createBackup: (scope?: DataScope) => Promise<DataBackupResult>;
       restoreBackup: (scope?: DataScope) => Promise<DataRestoreResult>;
       getAutoBackupStatus: () => Promise<AutoBackupStatus>;
+
+      // ---- Cloud Sync ----
+      getCloudSyncSettings: () => Promise<CloudSyncSettings>;
+      saveCloudSyncSettings: (
+        data: Record<string, unknown>,
+      ) => Promise<{ success: boolean }>;
+      syncNow: () => Promise<{ success: boolean; error?: string }>;
+      testCloudConnection: (
+        serverUrl: string,
+        apiKey: string,
+      ) => Promise<{ success: boolean; error?: string }>;
     };
   }
 }

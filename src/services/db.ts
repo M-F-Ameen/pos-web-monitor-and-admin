@@ -10,6 +10,7 @@
 
 // Re-export shared types for easy imports from React components
 export type {
+  CloudSyncSettings,
   User,
   AuthResult,
   Category,
@@ -609,12 +610,12 @@ export const treasury = {
 export const settings = {
   get: async () =>
     api()?.getSettings() ?? {
-      storeName: "متجر التبغ",
+      storeName: "ꢤ� �颠�",
       storeAddress: "",
       storePhone: "",
       taxRate: 5,
       currency: "LE",
-      currencySymbol: "ج.م",
+      currencySymbol: "�.�",
       themeMode: "dark" as const,
       receiptFooter: "",
       defaultPaymentMethod: "cash" as const,
@@ -623,6 +624,14 @@ export const settings = {
       printReceiptAutomatically: false,
       receiptPrinterName: "",
       defaultProductImage: "",
+      cloudSync: {
+        enabled: false,
+        serverUrl: "",
+        apiKey: "",
+        syncInterval: 5,
+        lastSyncAt: null,
+        lastSyncStatus: null,
+      },
     },
   update: async (data: Record<string, unknown>) => {
     const result = (await api()?.updateSettings(data)) ?? null;
@@ -775,6 +784,41 @@ export const printers = {
       };
     }
     return bridge.printTestReceipt(options);
+  },
+};
+
+// ============================================
+// Cloud Sync
+// ============================================
+
+export const cloudSync = {
+  getSettings: async () => {
+    const bridge = api();
+    if (!bridge?.getCloudSyncSettings) {
+      return null;
+    }
+    return bridge.getCloudSyncSettings();
+  },
+  saveSettings: async (data: Record<string, unknown>) => {
+    const bridge = api();
+    if (!bridge?.saveCloudSyncSettings) {
+      return { success: false };
+    }
+    return bridge.saveCloudSyncSettings(data);
+  },
+  syncNow: async () => {
+    const bridge = api();
+    if (!bridge?.syncNow) {
+      return { success: false, error: "Electron bridge is unavailable." };
+    }
+    return bridge.syncNow();
+  },
+  testConnection: async (serverUrl: string, apiKey: string) => {
+    const bridge = api();
+    if (!bridge?.testCloudConnection) {
+      return { success: false, error: "Electron bridge is unavailable." };
+    }
+    return bridge.testCloudConnection(serverUrl, apiKey);
   },
 };
 

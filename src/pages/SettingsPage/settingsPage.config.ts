@@ -1,6 +1,6 @@
 import type { DataScope, POSSettings } from "../../services/db";
 
-export type SettingsTab = "general" | "backup" | "print";
+export type SettingsTab = "general" | "backup" | "print" | "cloud";
 
 export const DEFAULT_SETTINGS_FORM: POSSettings = {
   storeName: "متجر التبغ",
@@ -17,12 +17,21 @@ export const DEFAULT_SETTINGS_FORM: POSSettings = {
   printReceiptAutomatically: false,
   receiptPrinterName: "",
   defaultProductImage: "",
+  cloudSync: {
+    enabled: false,
+    serverUrl: "",
+    apiKey: "",
+    syncInterval: 5,
+    lastSyncAt: null,
+    lastSyncStatus: null,
+  },
 };
 
 export const SETTINGS_TABS: Array<{ id: SettingsTab; label: string }> = [
   { id: "general", label: "الإعدادات العامة" },
   { id: "backup", label: "النسخ الاحتياطي" },
   { id: "print", label: "الطباعة" },
+  { id: "cloud", label: "المزامنة السحابية" },
 ];
 
 export const DATA_SCOPE_CONFIG: Record<

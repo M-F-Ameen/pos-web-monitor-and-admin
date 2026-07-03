@@ -1,5 +1,6 @@
 import { getDb, seedDatabase } from "../database";
 import type {
+  CloudSyncSettings,
   DataResetSummary,
   DataScope,
   OperationsResetSummary,
@@ -9,6 +10,15 @@ import type {
 // ============================================
 // Settings Service
 // ============================================
+
+const DEFAULT_CLOUD_SYNC: CloudSyncSettings = {
+  enabled: false,
+  serverUrl: "",
+  apiKey: "",
+  syncInterval: 5,
+  lastSyncAt: null,
+  lastSyncStatus: null,
+};
 
 const DEFAULTS: POSSettings = {
   storeName: "متجر التبغ",
@@ -25,6 +35,7 @@ const DEFAULTS: POSSettings = {
   printReceiptAutomatically: false,
   receiptPrinterName: "",
   defaultProductImage: "",
+  cloudSync: DEFAULT_CLOUD_SYNC,
 };
 
 export function getSettings(): POSSettings {
@@ -37,6 +48,16 @@ export function getSettings(): POSSettings {
   const stored: Record<string, string> = {};
   for (const row of rows) {
     stored[row.key] = row.value;
+  }
+
+  let cloudSync: CloudSyncSettings = DEFAULT_CLOUD_SYNC;
+  try {
+    if (stored.cloudSync) {
+      const parsed = JSON.parse(stored.cloudSync);
+      cloudSync = { ...DEFAULT_CLOUD_SYNC, ...parsed };
+    }
+  } catch {
+    // ignore invalid JSON
   }
 
   return {
@@ -58,6 +79,7 @@ export function getSettings(): POSSettings {
       stored.receiptPrinterName ?? DEFAULTS.receiptPrinterName,
     defaultProductImage:
       stored.defaultProductImage ?? DEFAULTS.defaultProductImage,
+    cloudSync,
   };
 }
 
@@ -85,7 +107,11 @@ export function updateSettings(data: Partial<POSSettings>): POSSettings {
   const txn = db.transaction(() => {
     for (const [key, value] of Object.entries(data)) {
       if (value !== undefined) {
-        upsert.run(key, String(value));
+        if (key === "cloudSync") {
+          upsert.run(key, JSON.stringify(value));
+        } else {
+          upsert.run(key, String(value));
+        }
       }
     }
   });

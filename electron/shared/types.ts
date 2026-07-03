@@ -431,6 +431,15 @@ export interface TreasuryOperationRow {
 // POS SETTINGS
 // ============================================
 
+export interface CloudSyncSettings {
+  enabled: boolean;
+  serverUrl: string;
+  apiKey: string;
+  syncInterval: number;
+  lastSyncAt: string | null;
+  lastSyncStatus: "success" | "error" | null;
+}
+
 export interface POSSettings {
   storeName: string;
   storeAddress: string;
@@ -446,6 +455,7 @@ export interface POSSettings {
   printReceiptAutomatically: boolean;
   receiptPrinterName: string;
   defaultProductImage: string;
+  cloudSync?: CloudSyncSettings;
 }
 
 export interface OperationsResetSummary {

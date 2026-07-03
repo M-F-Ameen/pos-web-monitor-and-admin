@@ -4,7 +4,6 @@
   "version": "1.0.0",
   "description": "Freedom POS Desktop Application",
   "author": "Freedom",
-  "type": "module",
   "main": "electron-dist/main.js",
   "scripts": {
     "dev:renderer": "vite",

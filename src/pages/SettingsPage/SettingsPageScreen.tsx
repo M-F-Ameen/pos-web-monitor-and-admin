@@ -15,6 +15,7 @@ import {
 } from "../../services/db";
 import type {
   AutoBackupStatus,
+  CloudSyncSettings,
   DataResetSummary,
   DataScope,
   InstalledPrinter,
@@ -22,6 +23,7 @@ import type {
   ThemeMode,
 } from "../../services/db";
 import { SettingsBackupSection } from "./SettingsBackupSection";
+import { SettingsCloudSyncSection } from "./SettingsCloudSyncSection";
 import { SettingsDialogs } from "./SettingsDialogs";
 import { SettingsGeneralSection } from "./SettingsGeneralSection";
 import { SettingsPrintSection } from "./SettingsPrintSection";
@@ -82,6 +84,10 @@ export function SettingsPage() {
   );
   const messageTimeoutRef = useRef<number | null>(null);
 
+  const [cloudSettings, setCloudSettings] = useState<CloudSyncSettings>(
+    DEFAULT_SETTINGS_FORM.cloudSync!,
+  );
+
   const creatingBackup = activeBackupScope !== null;
   const restoringBackup = activeRestoreScope !== null;
   const resettingData = activeResetScope !== null;
@@ -92,6 +98,9 @@ export function SettingsPage() {
     try {
       const data = await settingsService.get();
       setSettings(data);
+      if (data.cloudSync) {
+        setCloudSettings(data.cloudSync);
+      }
     } catch (error) {
       console.error("Failed to load settings:", error);
     }
@@ -273,6 +282,13 @@ export function SettingsPage() {
 
     void loadSettings();
     showMessage("تم إعادة ضبط الإعدادات", "success", 3000);
+  };
+
+  const handleCloudSettingsChange = (field: string, value: unknown) => {
+    if (!canManage) return;
+    const updated = { ...cloudSettings, [field]: value };
+    setCloudSettings(updated);
+    setSettings((prev) => ({ ...prev, cloudSync: updated }));
   };
 
   const handleDefaultImageFileChange = (
@@ -615,6 +631,14 @@ export function SettingsPage() {
               recommendedPrinterName={recommendedPrinterName}
               settings={settings}
               xp80cAvailable={xp80cAvailable}
+            />
+          )}
+
+          {activeTab === "cloud" && (
+            <SettingsCloudSyncSection
+              cloudSettings={cloudSettings}
+              canManage={canManage}
+              onSettingsChange={handleCloudSettingsChange}
             />
           )}
 
