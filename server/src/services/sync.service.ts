@@ -51,8 +51,16 @@ const UPSERTS: Record<string, UpsertDef> = {
   suppliers: {
     table: "suppliers",
     pk: "id",
-    columns: ["tenant_id", "id", "name", "phone", "created_at"],
-    updateSet: "name = EXCLUDED.name, phone = EXCLUDED.phone",
+    columns: [
+      "tenant_id", "id", "name", "phone", "supplier_code",
+      "email", "address", "notes", "debt",
+      "total_purchases", "total_paid", "created_at", "updated_at",
+    ],
+    updateSet:
+      "name=EXCLUDED.name, phone=EXCLUDED.phone, supplier_code=EXCLUDED.supplier_code, " +
+      "email=EXCLUDED.email, address=EXCLUDED.address, notes=EXCLUDED.notes, " +
+      "debt=EXCLUDED.debt, total_purchases=EXCLUDED.total_purchases, " +
+      "total_paid=EXCLUDED.total_paid, updated_at=EXCLUDED.updated_at",
   },
   products: {
     table: "products",
@@ -152,6 +160,19 @@ const UPSERTS: Record<string, UpsertDef> = {
       "end_cash=EXCLUDED.end_cash, total_sales=EXCLUDED.total_sales, " +
       "total_returns=EXCLUDED.total_returns, total_expenses=EXCLUDED.total_expenses, " +
       "total_withdrawals=EXCLUDED.total_withdrawals, operations_count=EXCLUDED.operations_count",
+  },
+  supplier_operations: {
+    table: "supplier_operations",
+    pk: "id",
+    columns: [
+      "tenant_id", "id", "supplier_id", "type",
+      "purchase_amount", "paid_amount", "debt_before", "debt_after",
+      "note", "created_at",
+    ],
+    updateSet:
+      "type=EXCLUDED.type, purchase_amount=EXCLUDED.purchase_amount, " +
+      "paid_amount=EXCLUDED.paid_amount, debt_before=EXCLUDED.debt_before, " +
+      "debt_after=EXCLUDED.debt_after, note=EXCLUDED.note",
   },
 };
 

@@ -45,11 +45,37 @@ CREATE TABLE IF NOT EXISTS categories (
 -- SUPPLIERS
 -- ============================================================================
 CREATE TABLE IF NOT EXISTS suppliers (
-  tenant_id   TEXT NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
-  id          TEXT NOT NULL,
-  name        TEXT NOT NULL,
-  phone       TEXT NOT NULL DEFAULT '',
-  created_at  TIMESTAMPTZ NOT NULL DEFAULT now(),
+  tenant_id       TEXT NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+  id              TEXT NOT NULL,
+  name            TEXT NOT NULL,
+  phone           TEXT NOT NULL DEFAULT '',
+  supplier_code   TEXT NOT NULL DEFAULT '',
+  email           TEXT NOT NULL DEFAULT '',
+  address         TEXT NOT NULL DEFAULT '',
+  notes           TEXT NOT NULL DEFAULT '',
+  debt            NUMERIC(12,2) NOT NULL DEFAULT 0,
+  total_purchases INTEGER NOT NULL DEFAULT 0,
+  total_paid      NUMERIC(12,2) NOT NULL DEFAULT 0,
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+  updated_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
+
+  PRIMARY KEY (tenant_id, id)
+);
+
+-- ============================================================================
+-- SUPPLIER OPERATIONS LEDGER
+-- ============================================================================
+CREATE TABLE IF NOT EXISTS supplier_operations (
+  tenant_id       TEXT NOT NULL REFERENCES tenants(id) ON DELETE CASCADE,
+  id              TEXT NOT NULL,
+  supplier_id     TEXT NOT NULL,
+  type            TEXT NOT NULL CHECK(type IN ('purchase','settlement')),
+  purchase_amount NUMERIC(12,2) NOT NULL DEFAULT 0,
+  paid_amount     NUMERIC(12,2) NOT NULL DEFAULT 0,
+  debt_before     NUMERIC(12,2) NOT NULL DEFAULT 0,
+  debt_after      NUMERIC(12,2) NOT NULL DEFAULT 0,
+  note            TEXT NOT NULL DEFAULT '',
+  created_at      TIMESTAMPTZ NOT NULL DEFAULT now(),
 
   PRIMARY KEY (tenant_id, id)
 );
@@ -245,7 +271,7 @@ BEGIN
     SELECT unnest(ARRAY[
       'categories', 'suppliers', 'products', 'customers',
       'users', 'sales', 'sale_items', 'returns',
-      'treasury_operations', 'user_shifts', 'sync_meta'
+      'treasury_operations', 'user_shifts', 'sync_meta', 'supplier_operations'
     ])
   LOOP
     EXECUTE format('ALTER TABLE %I ENABLE ROW LEVEL SECURITY', tbl);
@@ -292,3 +318,8 @@ CREATE INDEX IF NOT EXISTS idx_user_shifts_tenant_login
   ON user_shifts (tenant_id, login_at DESC);
 CREATE INDEX IF NOT EXISTS idx_sync_meta_tenant
   ON sync_meta (tenant_id);
+
+CREATE INDEX IF NOT EXISTS idx_suppliers_tenant_name
+  ON suppliers (tenant_id, name);
+CREATE INDEX IF NOT EXISTS idx_supplier_operations_tenant_supplier
+  ON supplier_operations (tenant_id, supplier_id, created_at DESC);

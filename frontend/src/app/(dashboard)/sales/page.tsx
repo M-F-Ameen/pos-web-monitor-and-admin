@@ -161,11 +161,11 @@ export default function SalesPage() {
                 <div className="border-t pt-4 space-y-2">
                   <div className="flex justify-between">
                     <span className="text-text-secondary">عدد العناصر</span>
-                    <span className="font-semibold">{selectedSale.items_count}</span>
+                    <span className="font-semibold">{selectedSale.items?.length ?? 0}</span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-text-secondary">الخصم</span>
-                    <span className="font-semibold">{formatCurrency(selectedSale.discount)}</span>
+                    <span className="font-semibold">{formatCurrency(selectedSale.discount_amount)}</span>
                   </div>
                   <div className="flex justify-between border-t pt-2 font-bold text-lg">
                     <span>الإجمالي</span>

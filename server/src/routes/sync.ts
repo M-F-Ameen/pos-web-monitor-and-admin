@@ -30,6 +30,13 @@ export function createSyncRouter(io: SocketServer) {
   });
 
   // -----------------------------------------------------------------------
+  // GET /api/sync/verify — lightweight auth check for POS connection tests
+  // -----------------------------------------------------------------------
+  router.get("/sync/verify", requireSyncAuth, (req: Request, res: Response) => {
+    res.json({ success: true, tenantId: req.tenantId });
+  });
+
+  // -----------------------------------------------------------------------
   // POST /api/sync/batch
   // -----------------------------------------------------------------------
   router.post("/sync/batch", requireSyncAuth, async (req: Request, res: Response) => {

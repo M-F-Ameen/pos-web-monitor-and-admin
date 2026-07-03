@@ -10,17 +10,23 @@ export const SaleSchema = z.object({
   id: z.string(),
   receipt_number: z.string(),
   created_at: z.string(),
-  customer_id: z.string().optional(),
-  customer_name: z.string().optional(),
+  customer_id: z.string().optional().nullable(),
+  customer_name: z.string().optional().nullable(),
   cashier_id: z.string(),
   cashier_name: z.string(),
   payment_method: z.string(),
+  subtotal: z.number(),
   total: z.number(),
-  tax: z.number(),
-  discount: z.number(),
-  items_count: z.number(),
+  tax_amount: z.number(),
+  discount_amount: z.number(),
+  discount_type: z.string(),
+  discount_value: z.number(),
+  increase_amount: z.number().optional(),
+  amount_received: z.number(),
+  change_given: z.number(),
   status: z.string(),
-  notes: z.string().optional(),
+  note: z.string().optional().nullable(),
+  reference: z.string().optional(),
   items: z.any().optional(),
 });
 export type Sale = z.infer<typeof SaleSchema>;
@@ -41,7 +47,7 @@ export const ReturnSchema = z.object({
   id: z.string(),
   return_number: z.string(),
   created_at: z.string(),
-  sale_id: z.string().optional(),
+  sale_id: z.string().optional().nullable(),
   product_id: z.string(),
   product_name: z.string(),
   quantity: z.number(),
@@ -49,7 +55,7 @@ export const ReturnSchema = z.object({
   reason: z.string(),
   status: z.string(),
   processed_by: z.string(),
-  notes: z.string().optional(),
+  processed_by_id: z.string().optional(),
 });
 export type Return = z.infer<typeof ReturnSchema>;
 
@@ -74,7 +80,6 @@ export const TreasuryTransactionSchema = z.object({
   user_id: z.string(),
   user_name: z.string(),
   source: z.string(),
-  notes: z.string().optional(),
 });
 export type TreasuryTransaction = z.infer<typeof TreasuryTransactionSchema>;
 
@@ -174,12 +179,13 @@ export const CustomerSchema = z.object({
   id: z.string(),
   name: z.string(),
   phone: z.string(),
-  email: z.string().optional(),
+  email: z.string().optional().nullable(),
   debt: z.number(),
   totalPurchases: z.number(),
   totalSpent: z.number(),
   created_at: z.string(),
-  notes: z.string().optional(),
+  notes: z.string().optional().nullable(),
+  address: z.string().optional().nullable(),
 });
 export type Customer = z.infer<typeof CustomerSchema>;
 
