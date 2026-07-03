@@ -464,6 +464,34 @@ const MIGRATIONS: { version: number; description: string; sql: string }[] = [
         AND ABS((price * quantity) - (subtotal + discount)) <= 0.11;
     `,
   },
+  {
+    version: 14,
+    description: "Add supplier_id and unit to products for cloud sync compatibility",
+    sql: `
+      ALTER TABLE products ADD COLUMN supplier_id TEXT NOT NULL DEFAULT '';
+      ALTER TABLE products ADD COLUMN unit TEXT NOT NULL DEFAULT 'piece';
+    `,
+  },
+  {
+    version: 15,
+    description: "Add updated_at to tables missing it for incremental sync",
+    sql: `
+      ALTER TABLE categories ADD COLUMN updated_at TEXT NOT NULL DEFAULT (datetime('now','localtime'));
+      ALTER TABLE sales ADD COLUMN updated_at TEXT NOT NULL DEFAULT (datetime('now','localtime'));
+      ALTER TABLE returns ADD COLUMN updated_at TEXT NOT NULL DEFAULT (datetime('now','localtime'));
+      ALTER TABLE treasury_ops ADD COLUMN updated_at TEXT NOT NULL DEFAULT (datetime('now','localtime'));
+      ALTER TABLE users ADD COLUMN updated_at TEXT NOT NULL DEFAULT (datetime('now','localtime'));
+      ALTER TABLE supplier_operations ADD COLUMN updated_at TEXT NOT NULL DEFAULT (datetime('now','localtime'));
+    `,
+  },
+  {
+    version: 16,
+    description: "Add increase_amount to sales and processed_by_id to returns for cloud sync NOT NULL constraints",
+    sql: `
+      ALTER TABLE sales ADD COLUMN increase_amount REAL NOT NULL DEFAULT 0;
+      ALTER TABLE returns ADD COLUMN processed_by_id TEXT NOT NULL DEFAULT '';
+    `,
+  },
 ];
 
 function runMigrations(database: Database.Database): void {
