@@ -12,6 +12,7 @@
  */
 
 import { raw } from "../db/pool.js";
+import type pg from "pg";
 import type { Server as SocketServer } from "socket.io";
 
 // ---------------------------------------------------------------------------
@@ -191,8 +192,10 @@ const UPSERTS: Record<string, UpsertDef> = {
 export async function processSyncBatch(
   batch: SyncBatch,
   io: SocketServer,
-  tenantId: string
+  tenantId: string,
+  dbClient?: pg.PoolClient
 ): Promise<Record<string, number>> {
+  const q = dbClient ? dbClient.query.bind(dbClient) : raw;
   const counts: Record<string, number> = {};
 
   for (const payload of batch.tables) {
@@ -204,7 +207,7 @@ export async function processSyncBatch(
 
     if (payload.action === "delete" && payload.rows.length > 0) {
       const ids = payload.rows.map((r) => r[def.pk]);
-      await raw(
+      await q(
         `DELETE FROM ${def.table} WHERE tenant_id = $1 AND ${def.pk} = ANY($2::text[])`,
         [tenantId, ids]
       );
@@ -240,12 +243,12 @@ export async function processSyncBatch(
       ON CONFLICT ${conflictTarget} DO UPDATE SET ${def.updateSet}
     `;
 
-    await raw(sql, values);
+    await q(sql, values);
     counts[payload.table] = payload.rows.length;
   }
 
   // Update sync meta for this tenant
-  await raw(
+  await q(
     `INSERT INTO sync_meta (tenant_id, id, last_sync_at, pos_version, updated_at)
      VALUES ($1, 'default', now(), $2, now())
      ON CONFLICT (tenant_id, id)

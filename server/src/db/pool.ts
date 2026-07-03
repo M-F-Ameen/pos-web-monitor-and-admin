@@ -82,3 +82,14 @@ export async function queryOne<T extends pg.QueryResultRow = pg.QueryResultRow>(
 export async function raw(text: string, params?: unknown[]): Promise<pg.QueryResult> {
   return pool.query(text, params);
 }
+
+/**
+ * Acquire a dedicated client with tenant context set for RLS.
+ * All queries via this client share the same connection + tenant config.
+ * MUST call client.release() in a finally block.
+ */
+export async function acquireTenantClient(tenantId: string): Promise<pg.PoolClient> {
+  const client = await pool.connect();
+  await client.query("SELECT set_config('app.tenant_id', $1, true)", [tenantId]);
+  return client;
+}

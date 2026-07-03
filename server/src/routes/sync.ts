@@ -12,6 +12,7 @@ import { Router, type Request, type Response } from "express";
 import { z } from "zod";
 import { processSyncBatch, type SyncBatch } from "../services/sync.service.js";
 import { requireSyncAuth } from "../middleware/auth.js";
+import { acquireTenantClient } from "../db/pool.js";
 import type { Server as SocketServer } from "socket.io";
 
 export function createSyncRouter(io: SocketServer) {
@@ -40,6 +41,13 @@ export function createSyncRouter(io: SocketServer) {
   // POST /api/sync/batch
   // -----------------------------------------------------------------------
   router.post("/sync/batch", requireSyncAuth, async (req: Request, res: Response) => {
+    const tenantId = req.tenantId;
+    if (!tenantId) {
+      res.status(401).json({ success: false, error: "Tenant not authenticated" });
+      return;
+    }
+
+    const client = await acquireTenantClient(tenantId);
     try {
       const parsed = SyncBatchSchema.safeParse(req.body);
       if (!parsed.success) {
@@ -51,16 +59,11 @@ export function createSyncRouter(io: SocketServer) {
         return;
       }
 
-      const tenantId = req.tenantId;
-      if (!tenantId) {
-        res.status(401).json({ success: false, error: "Tenant not authenticated" });
-        return;
-      }
-
       const counts = await processSyncBatch(
         parsed.data as SyncBatch,
         io,
-        tenantId
+        tenantId,
+        client
       );
 
       console.log(
@@ -71,6 +74,8 @@ export function createSyncRouter(io: SocketServer) {
     } catch (err) {
       console.error("[sync] Batch processing error:", err);
       res.status(500).json({ success: false, error: "Internal server error" });
+    } finally {
+      client.release();
     }
   });
 

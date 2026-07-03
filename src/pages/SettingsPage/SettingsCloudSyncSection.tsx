@@ -128,29 +128,6 @@ export function SettingsCloudSyncSection({
               </div>
             </div>
 
-            <div className="settings-page__field">
-              <label htmlFor="cloudSyncInterval">
-                فترة المزامنة (بالدقائق)
-              </label>
-              <div className="pos-input-wrapper">
-                <input
-                  id="cloudSyncInterval"
-                  type="number"
-                  className="pos-input"
-                  value={cloudSettings.syncInterval}
-                  onChange={(e) =>
-                    onSettingsChange(
-                      "syncInterval",
-                      parseInt(e.target.value) || 5,
-                    )
-                  }
-                  min={1}
-                  max={1440}
-                  disabled={!canManage}
-                />
-              </div>
-            </div>
-
             <div className="settings-page__printer-actions">
               <Button
                 size="sm"
