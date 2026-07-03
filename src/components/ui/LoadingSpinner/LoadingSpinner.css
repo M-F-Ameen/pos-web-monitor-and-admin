@@ -1,0 +1,128 @@
+.loading-spinner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-md);
+  font-family: var(--font-family);
+}
+
+.loading-spinner--centered {
+  justify-content: center;
+  width: 100%;
+}
+
+.loading-spinner-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 120px;
+}
+
+/* Spinner Circle */
+.loading-spinner__circle {
+  position: relative;
+  border-radius: 50%;
+  animation: loading-spin 1.2s linear infinite;
+}
+
+.loading-spinner__path {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: currentColor;
+  border-right-color: currentColor;
+  opacity: 0.75;
+}
+
+/* Sizes */
+.loading-spinner--sm .loading-spinner__circle {
+  width: 16px;
+  height: 16px;
+}
+
+.loading-spinner--sm .loading-spinner__message {
+  font-size: var(--font-size-sm);
+}
+
+.loading-spinner--md .loading-spinner__circle {
+  width: 24px;
+  height: 24px;
+}
+
+.loading-spinner--md .loading-spinner__message {
+  font-size: var(--font-size-base);
+}
+
+.loading-spinner--lg .loading-spinner__circle {
+  width: 32px;
+  height: 32px;
+}
+
+.loading-spinner--lg .loading-spinner__message {
+  font-size: var(--font-size-lg);
+}
+
+.loading-spinner--xl .loading-spinner__circle {
+  width: 48px;
+  height: 48px;
+}
+
+.loading-spinner--xl .loading-spinner__message {
+  font-size: var(--font-size-xl);
+}
+
+/* Variants */
+.loading-spinner--primary {
+  color: var(--color-text-primary);
+}
+
+.loading-spinner--secondary {
+  color: var(--color-text-secondary);
+}
+
+.loading-spinner--accent {
+  color: var(--color-accent);
+}
+
+/* Message */
+.loading-spinner__message {
+  color: currentColor;
+  line-height: 1.4;
+  font-weight: var(--font-weight-medium);
+}
+
+/* Screen reader only */
+.loading-spinner__sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Keyframe animation */
+@keyframes loading-spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .loading-spinner__circle {
+    animation: none;
+  }
+
+  .loading-spinner__path {
+    border: 2px solid currentColor;
+    opacity: 0.3;
+  }
+}

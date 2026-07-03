@@ -1,0 +1,119 @@
+.optimized-image {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-sm);
+  background: var(--color-bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.optimized-image--aspect-ratio {
+  width: 100%;
+  height: auto;
+}
+
+.optimized-image__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity var(--transition-fast);
+}
+
+.optimized-image__overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+}
+
+.optimized-image__overlay--loading {
+  background: rgba(var(--color-bg-tertiary-rgb, 45, 45, 45), 0.9);
+}
+
+.optimized-image__overlay--error {
+  background: var(--color-bg-secondary);
+  border: 1px dashed var(--color-border);
+}
+
+.optimized-image__error {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+  padding: var(--space-md);
+}
+
+.optimized-image__error svg {
+  width: 24px;
+  height: 24px;
+  opacity: 0.6;
+}
+
+.optimized-image__error-text {
+  font-size: var(--font-size-sm);
+  line-height: 1.4;
+}
+
+.optimized-image__placeholder {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+  min-height: 120px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 640px) {
+  .optimized-image__error {
+    padding: var(--space-sm);
+  }
+
+  .optimized-image__error svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .optimized-image__error-text {
+    font-size: 12px;
+  }
+}
+
+/* Loading shimmer effect */
+.optimized-image--loading .optimized-image__placeholder {
+  background: linear-gradient(
+    90deg,
+    var(--color-bg-tertiary) 0%,
+    var(--color-bg-elevated) 50%,
+    var(--color-bg-tertiary) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Reduce motion support */
+@media (prefers-reduced-motion: reduce) {
+  .optimized-image__img {
+    transition: none;
+  }
+
+  .optimized-image--loading .optimized-image__placeholder {
+    animation: none;
+    background: var(--color-bg-tertiary);
+  }
+}

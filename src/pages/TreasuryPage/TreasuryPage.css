@@ -1,0 +1,178 @@
+.treasury-page__content {
+  box-shadow: var(--shadow-card);
+  padding-left: 3px;
+}
+
+.treasury-toolbar__search {
+  min-width: 240px;
+}
+
+.treasury-toolbar__select {
+  width: 148px;
+  border-radius: var(--radius-pill);
+}
+
+.treasury-stats {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(140px, 1fr));
+  gap: 8px;
+}
+
+.treasury-stat-card {
+  border-radius: var(--radius-lg);
+  border: 1px solid #343434;
+  padding: 12px;
+  background: linear-gradient(160deg, #232323, #1b1b1b);
+  box-shadow: var(--shadow-soft);
+}
+
+.treasury-stat-card__label {
+  display: block;
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.treasury-stat-card__value {
+  display: block;
+  margin-top: 6px;
+  font-size: 1.28rem;
+  font-weight: var(--font-weight-bold);
+}
+
+.treasury-stat-card--positive .treasury-stat-card__value {
+  color: #8ce2b3;
+}
+
+.treasury-stat-card--negative .treasury-stat-card__value {
+  color: #ff9d9d;
+}
+
+.treasury-stat-card--balance {
+  border-color: rgba(255, 122, 0, 0.36);
+  background:
+    linear-gradient(160deg, rgba(255, 122, 0, 0.18), rgba(255, 122, 0, 0.06)),
+    #1f1f1f;
+}
+
+.treasury-stat-card--balance .treasury-stat-card__value {
+  color: #ffd29f;
+}
+
+.treasury-table-card__meta {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.treasury-table-card__scroll {
+  padding: 4px 7px 7px;
+}
+
+.treasury-table {
+  min-width: 960px;
+}
+
+.treasury-table th,
+.treasury-table td {
+  padding: 4px 10px;
+  vertical-align: middle;
+}
+
+.treasury-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  width: fit-content;
+  margin: 0 auto 8px;
+  padding: 5px 8px;
+  border: 1px solid #333333;
+  border-radius: var(--radius-pill);
+  background: #242424;
+}
+
+.treasury-pagination__button.pos-button {
+  height: 24px;
+  min-width: 56px;
+  padding: 0 10px;
+  border-radius: var(--radius-pill);
+  font-size: 0.72rem;
+  color: #e8e8e8;
+  background: #2d2d2d;
+  border: 1px solid #3a3a3a;
+}
+
+.treasury-pagination__button.pos-button:hover:not(:disabled) {
+  background: #353535;
+}
+
+.treasury-pagination__status {
+  font-size: 0.74rem;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.treasury-amount {
+  font-weight: var(--font-weight-semibold);
+}
+
+.treasury-amount--plus {
+  color: #84deab;
+}
+
+.treasury-amount--minus {
+  color: #ff9c9c;
+}
+
+.treasury-type-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 72px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  font-size: 0.76rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.treasury-type-badge--sale {
+  color: #8ce2b3;
+  background: rgba(77, 201, 139, 0.13);
+  border: 1px solid rgba(77, 201, 139, 0.38);
+}
+
+.treasury-type-badge--return {
+  color: #ffb1b1;
+  background: rgba(240, 68, 68, 0.13);
+  border: 1px solid rgba(240, 68, 68, 0.38);
+}
+
+.treasury-type-badge--withdraw,
+.treasury-type-badge--expense {
+  color: #ffcb92;
+  background: rgba(255, 122, 0, 0.14);
+  border: 1px solid rgba(255, 122, 0, 0.36);
+}
+
+.treasury-table__muted {
+  color: var(--color-text-muted);
+}
+
+@media (max-width: 1220px) {
+  .treasury-stats {
+    grid-template-columns: repeat(2, minmax(140px, 1fr));
+  }
+}
+
+@media (max-width: 860px) {
+  .treasury-toolbar__search {
+    min-width: 0;
+  }
+
+  .treasury-toolbar__select {
+    width: 100%;
+  }
+
+  .treasury-stats {
+    grid-template-columns: 1fr;
+  }
+}

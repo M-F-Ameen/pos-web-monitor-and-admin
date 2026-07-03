@@ -1,0 +1,39 @@
+.sales-page__message {
+  padding: 9px 12px;
+  border-radius: var(--radius-md);
+  border-inline-start: 3px solid transparent;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.sales-page__message--success {
+  background: rgba(77, 201, 139, 0.12);
+  border: 1px solid rgba(77, 201, 139, 0.35);
+  border-inline-start-color: #4dc98b;
+  color: #9ae7bf;
+}
+
+.sales-page__message--error {
+  background: rgba(240, 68, 68, 0.12);
+  border: 1px solid rgba(240, 68, 68, 0.35);
+  border-inline-start-color: #f04444;
+  color: #ffc2c2;
+}
+
+.sales-table-card__header-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+@media (max-width: 860px) {
+  .sales-table-card__header-actions {
+    width: 100%;
+    justify-content: stretch;
+  }
+
+  .sales-table-card__header-actions .pos-button {
+    width: 100%;
+  }
+}

@@ -1,0 +1,141 @@
+.return-details-modal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+/* Return Badge */
+.return-details-modal__badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-sm);
+  padding: var(--space-md);
+  background: rgba(244, 67, 54, 0.1);
+  border: 1px solid rgba(244, 67, 54, 0.3);
+  border-radius: var(--radius-md);
+  color: #f44336;
+  font-weight: var(--font-weight-medium);
+}
+
+.return-details-modal__badge svg {
+  width: 24px;
+  height: 24px;
+}
+
+/* Receipt Preview */
+.return-details-modal__preview {
+  background: white;
+  color: #000;
+  padding: var(--space-lg);
+  border-radius: var(--radius-md);
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.receipt {
+  direction: rtl;
+}
+
+.receipt__loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+.receipt__header {
+  text-align: center;
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px dashed #ccc;
+}
+
+.receipt__store-name {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.receipt__badge {
+  display: inline-block;
+  padding: 4px 12px;
+  margin: 8px 0;
+  background-color: #f44336;
+  color: white;
+  border-radius: 4px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.receipt__meta {
+  margin-bottom: var(--space-md);
+  font-size: 10px;
+  color: #666;
+}
+
+.receipt__meta > div {
+  margin-bottom: 2px;
+}
+
+.receipt__section {
+  margin-bottom: var(--space-md);
+  padding-bottom: var(--space-md);
+  border-bottom: 1px dashed #ccc;
+}
+
+.receipt__section:last-of-type {
+  border-bottom: none;
+}
+
+.receipt__section-title {
+  font-weight: bold;
+  margin-bottom: 8px;
+  font-size: 13px;
+  color: #000;
+}
+
+.receipt__items {
+  margin-bottom: 8px;
+}
+
+.receipt__item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 4px;
+}
+
+.receipt__item-qty {
+  color: #666;
+}
+
+.receipt__row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 3px;
+  font-size: 11px;
+}
+
+.receipt__footer {
+  text-align: center;
+  font-size: 10px;
+  color: #666;
+  margin-top: var(--space-md);
+  padding-top: var(--space-md);
+}
+
+/* Footer */
+.return-details-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-md);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .return-details-modal__preview {
+    font-size: 11px;
+    padding: var(--space-md);
+  }
+}

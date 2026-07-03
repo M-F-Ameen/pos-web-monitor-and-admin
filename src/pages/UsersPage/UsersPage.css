@@ -1,0 +1,113 @@
+.users-page__content {
+  box-shadow: var(--shadow-card);
+  padding-left: 3px;
+}
+
+.users-table-card__scroll {
+  padding: 3px 7px 7px;
+}
+
+.users-table {
+  min-width: 780px;
+}
+
+.users-table th,
+.users-table td {
+  vertical-align: middle;
+}
+
+.users-table__name {
+  display: inline-block;
+  color: #ffe0bf;
+  font-weight: var(--font-weight-semibold);
+}
+
+.users-role {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 74px;
+  height: 28px;
+  border-radius: var(--radius-pill);
+  font-size: 0.75rem;
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.03em;
+}
+
+.users-role--admin {
+  color: #ffcb92;
+  background: rgba(255, 122, 0, 0.17);
+  border: 1px solid rgba(255, 122, 0, 0.35);
+}
+
+.users-role--pos {
+  color: #a7d8ff;
+  background: rgba(38, 143, 255, 0.14);
+  border: 1px solid rgba(38, 143, 255, 0.3);
+}
+
+.users-table__protected {
+  display: inline-flex;
+  margin-bottom: 6px;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  border: 1px solid rgba(255, 122, 0, 0.4);
+  background: rgba(255, 122, 0, 0.14);
+  color: #ffcb92;
+  font-size: 0.72rem;
+  font-weight: var(--font-weight-semibold);
+}
+
+.users-modal__permissions {
+  margin-top: 12px;
+  border: 1px solid #3b3b3b;
+  border-radius: var(--radius-md);
+  background: rgba(255, 255, 255, 0.02);
+  padding: 10px;
+}
+
+.users-modal__permissions-title {
+  margin: 0;
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.users-modal__permissions-grid {
+  margin-top: 8px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+.users-modal__permission-option {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 36px;
+  border: 1px solid #3d3d3d;
+  border-radius: var(--radius-sm);
+  background: #2a2a2a;
+  color: var(--color-text-secondary);
+  padding: 0 10px;
+  cursor: pointer;
+}
+
+.users-modal__permission-option input {
+  accent-color: #ff7a00;
+}
+
+@media (max-width: 860px) {
+  .users-toolbar__chips {
+    width: 100%;
+  }
+
+  .users-chip {
+    flex: 1;
+    justify-content: center;
+  }
+
+  .users-modal__permissions-grid {
+    grid-template-columns: 1fr;
+  }
+}

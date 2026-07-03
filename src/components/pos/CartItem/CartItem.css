@@ -1,0 +1,267 @@
+.pos-cart-item {
+  display: flex;
+  gap: 10px;
+  padding: 7px;
+  margin-bottom: 10px;
+  background: var(--surface-panel-strong-bg);
+  border: 1px solid var(--color-border-control-alt);
+  border-radius: var(--radius-block);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.34),
+    0 8px 16px rgba(0, 0, 0, 0.16);
+}
+
+.pos-cart-item:last-child {
+  margin-bottom: 0;
+}
+
+.pos-cart-item__image-wrap {
+  width: 60px;
+  height: 60px;
+  flex-shrink: 0;
+  border-radius: var(--radius-field);
+  overflow: hidden;
+  background: var(--surface-control-bg);
+  border: 1px solid var(--color-border-control);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.05),
+    0 4px 10px rgba(0, 0, 0, 0.14);
+}
+
+.pos-cart-item__image,
+.pos-cart-item__image-placeholder {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.pos-cart-item__image-placeholder {
+  background: var(--surface-panel-bg);
+}
+
+.pos-cart-item__content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.pos-cart-item__name {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.12;
+  font-weight: var(--font-weight-semibold);
+  color: #f8f6f2;
+}
+
+.pos-cart-item__category {
+  color: #a9a29a;
+  font-size: 0.8rem;
+  line-height: 1.2;
+}
+
+.pos-cart-item__meta {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.pos-cart-item__rating {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.95rem;
+  color: #c8c8c8;
+}
+
+.pos-cart-item__rating svg {
+  width: 13px;
+  height: 13px;
+  color: #ffab40;
+}
+
+.pos-cart-item__size {
+  border: none;
+  background: transparent;
+  color: #b9b9b9;
+  font-family: var(--font-family);
+  font-size: 0.95rem;
+  appearance: none;
+  padding-inline-end: 12px;
+  background-image:
+    linear-gradient(45deg, transparent 50%, #8c8c8c 50%),
+    linear-gradient(135deg, #8c8c8c 50%, transparent 50%);
+  background-position:
+    calc(100% - 8px) 50%,
+    calc(100% - 4px) 50%;
+  background-size:
+    4px 4px,
+    4px 4px;
+  background-repeat: no-repeat;
+}
+
+.pos-cart-item__pricing {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+.pos-cart-item__price {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 5px;
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: var(--font-weight-bold);
+  direction: ltr;
+  unicode-bidi: isolate;
+  color: #f6ddba;
+}
+
+.pos-cart-item__price-currency {
+  direction: rtl;
+  unicode-bidi: isolate;
+}
+
+.pos-cart-item__price-value {
+  direction: ltr;
+  unicode-bidi: isolate;
+}
+
+.pos-cart-item__original-price {
+  font-size: 1.1rem;
+  line-height: 1;
+  color: #949494;
+  text-decoration: line-through;
+  direction: ltr;
+}
+
+.pos-cart-item__quantity {
+  align-self: flex-end;
+  margin-inline-start: auto;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  direction: ltr;
+  border: 1px solid var(--color-border-interactive);
+  background: var(--surface-control-subtle-bg);
+  margin: auto;
+  padding: 3px 6px;
+  border-radius: var(--radius-sm);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    inset 0 -1px 0 rgba(0, 0, 0, 0.3),
+    0 4px 10px rgba(0, 0, 0, 0.14);
+}
+
+.pos-cart-item__qty-input {
+  width: 58px;
+  height: 36px;
+  border: 1px solid var(--color-border-control-alt);
+  border-radius: var(--radius-compact);
+  background: var(--surface-input-bg);
+  color: var(--color-text-primary);
+  text-align: center;
+  font-size: 1rem;
+  font-weight: var(--font-weight-semibold);
+  outline: none;
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.34),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03);
+  -moz-appearance: textfield;
+}
+
+.pos-cart-item__qty-input:focus {
+  border-color: var(--color-border-focus);
+  box-shadow:
+    inset 0 2px 4px rgba(0, 0, 0, 0.34),
+    var(--focus-ring-accent);
+}
+
+.pos-cart-item__qty-input::-webkit-outer-spin-button,
+.pos-cart-item__qty-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.pos-cart-item__delete-btn {
+  order: -2;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-compact);
+}
+
+.pos-cart-item__edit-btn {
+  order: -1;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-compact);
+}
+
+body[data-theme="light"] .pos-cart-item {
+  background: var(--surface-panel-strong-bg);
+  border-color: var(--color-border);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-theme="light"] .pos-cart-item__image-wrap {
+  background: var(--surface-control-bg);
+  border-color: var(--color-border-control);
+  box-shadow: var(--shadow-button-sm);
+}
+
+body[data-theme="light"] .pos-cart-item__image-placeholder {
+  background: linear-gradient(145deg, #f4eadf, #e3d3bf);
+}
+
+body[data-theme="light"] .pos-cart-item__name {
+  color: var(--color-text-primary);
+}
+
+body[data-theme="light"] .pos-cart-item__category,
+body[data-theme="light"] .pos-cart-item__rating,
+body[data-theme="light"] .pos-cart-item__size,
+body[data-theme="light"] .pos-cart-item__original-price {
+  color: var(--color-text-muted);
+}
+
+body[data-theme="light"] .pos-cart-item__rating svg {
+  color: var(--color-accent);
+}
+
+body[data-theme="light"] .pos-cart-item__size {
+  background-image:
+    linear-gradient(45deg, transparent 50%, #8f7558 50%),
+    linear-gradient(135deg, #8f7558 50%, transparent 50%);
+}
+
+body[data-theme="light"] .pos-cart-item__price {
+  color: var(--color-accent-text);
+}
+
+body[data-theme="light"] .pos-cart-item__quantity,
+body[data-theme="light"] .pos-cart-item__qty-input {
+  background: var(--surface-input-bg);
+  border-color: var(--color-border-interactive);
+}
+
+body[data-theme="light"] .pos-cart-item__quantity {
+  box-shadow: var(--shadow-input);
+}
+
+body[data-theme="light"] .pos-cart-item__qty-input {
+  box-shadow:
+    inset 0 2px 4px rgba(152, 118, 84, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+}
+
+body[data-theme="light"] .pos-cart-item__qty-input:focus {
+  border-color: var(--color-border-focus);
+  box-shadow:
+    inset 0 2px 4px rgba(152, 118, 84, 0.12),
+    var(--focus-ring-accent);
+}

@@ -1,0 +1,1 @@
+export { TreasuryPage } from "./TreasuryPage";

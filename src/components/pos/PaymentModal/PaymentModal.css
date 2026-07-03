@@ -1,0 +1,207 @@
+.payment-modal {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xl);
+}
+
+/* Total Display */
+.payment-modal__total {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-xs);
+  padding: var(--space-xl);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-lg);
+  text-align: center;
+  padding-bottom: 5px;
+  padding-top: 5px;
+}
+
+.payment-modal__total-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+}
+
+.payment-modal__total-value {
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+}
+
+/* Labels */
+.payment-modal__label {
+  display: block;
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-secondary);
+}
+
+/* Payment Methods */
+.payment-modal__methods {
+  display: flex;
+  flex-direction: column;
+}
+
+.payment-modal__method-buttons {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+.payment-modal__method-btn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  background: var(--color-bg-tertiary);
+  border: 2px solid transparent;
+  border-radius: var(--radius-md);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  padding: 5px;
+}
+
+.payment-modal__method-btn:hover:not(:disabled) {
+  background: var(--color-bg-elevated);
+  color: var(--color-text-primary);
+}
+
+.payment-modal__method-btn--active {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: white;
+}
+
+.payment-modal__method-btn--active:hover:not(:disabled) {
+  background: var(--color-accent-hover);
+}
+
+.payment-modal__method-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Cash Section */
+.payment-modal__cash {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.payment-modal__quick-amounts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.payment-modal__quick-btn {
+  padding: var(--space-sm) var(--space-md);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  color: var(--color-text-secondary);
+  font-family: var(--font-family);
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.payment-modal__quick-btn:hover:not(:disabled) {
+  background: var(--color-bg-elevated);
+  color: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.payment-modal__quick-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.payment-modal__amount-actions {
+  display: flex;
+  gap: var(--space-sm);
+}
+
+/* Change Display */
+.payment-modal__change {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-md) var(--space-lg);
+  border-radius: var(--radius-md);
+}
+
+.payment-modal__change--success {
+  background: rgba(34, 197, 94, 0.1);
+  border: 1px solid rgba(34, 197, 94, 0.3);
+}
+
+.payment-modal__change--success .payment-modal__change-value {
+  color: #22c55e;
+}
+
+.payment-modal__change--warning {
+  background: rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.payment-modal__change--warning .payment-modal__change-value {
+  color: var(--color-danger);
+}
+
+.payment-modal__change-label {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.payment-modal__change-value {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.payment-modal__debt-note {
+  margin: 0;
+  padding: var(--space-sm) var(--space-md);
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(255, 122, 0, 0.4);
+  background: rgba(255, 122, 0, 0.12);
+  color: #ffd5ab;
+  font-size: var(--font-size-sm);
+  line-height: 1.5;
+}
+
+.payment-modal__debt-note--warning {
+  border-color: rgba(239, 68, 68, 0.4);
+  background: rgba(239, 68, 68, 0.12);
+  color: #ffc2c2;
+}
+
+/* Card Section */
+.payment-modal__card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.payment-modal__hint {
+  margin: 0;
+  padding: var(--space-md);
+  background: var(--color-bg-tertiary);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+/* Footer */
+.payment-modal__footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--space-md);
+}
