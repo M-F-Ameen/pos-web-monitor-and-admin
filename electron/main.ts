@@ -1121,7 +1121,7 @@ function registerIpcHandlers(): void {
         { table: "sales", action: "upsert", rows: db.prepare("SELECT * FROM sales").all() },
         { table: "sale_items", action: "upsert", rows: db.prepare("SELECT * FROM sale_items").all() },
         { table: "returns", action: "upsert", rows: db.prepare("SELECT * FROM returns").all() },
-        { table: "treasury_ops", action: "upsert", rows: db.prepare("SELECT * FROM treasury_ops").all() },
+        { table: "treasury_operations", action: "upsert", rows: db.prepare("SELECT * FROM treasury_ops").all() },
         { table: "user_shifts", action: "upsert", rows: db.prepare("SELECT * FROM user_shifts").all() },
         { table: "customers", action: "upsert", rows: db.prepare("SELECT * FROM customers").all() },
         { table: "users", action: "upsert", rows: db.prepare("SELECT * FROM users").all() },
